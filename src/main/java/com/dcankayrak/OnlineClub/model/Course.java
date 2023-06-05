@@ -1,5 +1,6 @@
 package com.dcankayrak.OnlineClub.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,5 +35,6 @@ public class Course {
 
     @ManyToMany(mappedBy = "courses")
     @Column(name = "students")
+    @JsonIgnore
     private List<Student> students;
 }

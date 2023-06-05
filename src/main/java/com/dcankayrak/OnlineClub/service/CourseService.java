@@ -18,12 +18,10 @@ public class CourseService {
     private final CourseRepository courseRepository;
     private final TeacherRepository teacherRepository;
 
-    @Transactional
     public List<Course> getAllCourses(){
         return this.courseRepository.findAll();
     }
 
-    @Transactional
     public Course saveCourse(CourseSaveRequest request){
         final Teacher tempTeacher = this.teacherRepository.findById(request.getTeacherId()).orElse(null);
 
@@ -37,7 +35,6 @@ public class CourseService {
         return courseRepository.save(course);
     }
 
-    @Transactional
     public Course updateCourse(Long courseId, CourseUpdateRequest request){
         final Course tempCourse = this.courseRepository.findById(courseId).orElseThrow();
 
@@ -47,12 +44,9 @@ public class CourseService {
         return this.courseRepository.save(tempCourse);
     }
 
-    @Transactional
     public void deleteCourse(Long courseId){
         final Course tempCourse = this.courseRepository.findById(courseId).orElseThrow();
-        if(tempCourse != null) {
-            this.courseRepository.delete(tempCourse);
-        }
+        this.courseRepository.delete(tempCourse);
     }
 
 }
